@@ -1,0 +1,28 @@
+{% extends 'base.html'%}
+
+
+
+{% block content %}
+<h2>These are the rooms</h2>
+{% if user.is_authenticated %}
+<div class= 'row'>
+{% for room in rooms %}
+<div class="card" style="width: 18rem;">
+    <img src="#" class="card-img-top" alt="">
+    <div class="card-body">
+      <h5 class="card-title">{{room.room_type.name}}</h5>
+      <p class="card-text">Beds: {{room.room_type.beds}}</p></p>
+      <p class="card-text">Cost Per Night: {{room.room_type.price}}</p>
+      {% for date in room.booking_set.all %}
+      <p class="card-text">This room is being rented out from: {{date.book_start}}-{{date.book_end}}</p>
+      {% endfor %}
+      <p><a href="{% url 'create_booking' room.id%}">Book now</a></p>
+      <p></p>
+    </div>
+  </div>
+{% endfor %}
+
+
+{% endif %}
+</div>
+{% endblock %}
