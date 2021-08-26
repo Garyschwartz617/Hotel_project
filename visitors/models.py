@@ -1,3 +1,4 @@
+# from hotel import staff
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.deletion import CASCADE
@@ -17,12 +18,14 @@ class RoomType(models.Model):
     name = models.CharField(max_length=50, null=True)
     price = models.IntegerField()
     beds = models.IntegerField()
-
+    
     def __str__(self):
         return f'{self.beds} bedroom {self.name}'
 
 class Room(models.Model):
     room_type = models.ForeignKey(RoomType,on_delete=CASCADE)
+    def __str__(self):
+        return self.room_type.name
 
     # def is_available(self):
     #     for booking in self.booking_set.all():
@@ -54,3 +57,16 @@ class Booking(models.Model):
             elif self.book_start <= booking.book_start and self.book_end >= booking.book_end:
                 return False
         return True
+
+
+class Contact(models.Model):
+    profile = models.ForeignKey(Profile, on_delete=CASCADE)
+    author = models.CharField(max_length=50)
+    message = models.TextField()
+    def __str__(self):
+        return self.message
+
+
+class Review(models.Model):
+    profile = models.ForeignKey(Profile, on_delete=CASCADE)
+    review = models.TextField()

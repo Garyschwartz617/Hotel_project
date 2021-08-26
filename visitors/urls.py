@@ -9,11 +9,12 @@ urlpatterns = [
     path('profile/', views.UpdateProfile.as_view(), name='profile'),
     path('login/', LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
-    path('add_room_type', views.RoomTypeView.as_view(), name = 'create_room_type'),
-    path('add_room', views.RoomView.as_view(), name = 'create_room'),
+    path('add_room_type', views.CreateRoomTypeView.as_view(), name = 'create_room_type'),
+    path('add_room', views.CreateRoomView.as_view(), name = 'create_room'),
     path('rooms/', views.rooms,name= 'rooms'),
     path('booking/<int:pk>', views.BookingView.as_view(), name = 'booking_detail'),
     path('create_booking/<int:pk>', views.CreateBookingView.as_view(), name = 'create_booking'),
+    path('review/',views.CreateReviewView.as_view(), name='review'),
 
-
+    path('messages/',views.CreateContactView.as_view(), name='messages')
 ]

@@ -16,9 +16,13 @@
         <li class="list-group-item">Amount of people: {{object.people}}</li>
         <li class="list-group-item">Booking-start date: {{object.book_start}} </li>
         <li class="list-group-item">Booking-end date: {{object.book_end}} </li>
-        <p><a href="{% url 'create_booking' object.id%}">make a booking</a></p>
+        <p><a href="{% url 'staff_create_booking' %}">make a booking</a></p>
+        <p><a href="{% url 'staff_view_bookings' %}" >Booking List</a></p>
+        <p><a href="{% url 'staff_update_booking' object.id %}">Update this Booking</a></p>
 
-       
+        <p><a href="{% url 'staff_delete_booking' object.id %}">Delete this Booking</a></p>
+
+  
       </ul>
    
 </div>

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<h1>These are the bookings</h1>
+
+<div class="row">
+    <a href="{% url 'staff_create_booking'%}" class="btn btn-primary">Add Booking</a>
+    {% for booking in object_list %}
+    <div class="card" style="width: 18rem;">
+        <img src="#" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Name: {{booking.profile.user.username}} </h5>
+          <p class="card-text">Room: {{booking.room.room_type.name}}</p>
+          <p class="card-text">Booking-start date: {{booking.book_start}}</p>
+          <p class="card-text">Booking-end date: {{booking.book_end}}</p>
+          <a href="{% url 'staff_booking_detail' booking.id %}" class="btn btn-primary">Booking info</a>
+        </div>
+      </div>
+    {% endfor %}
+
+</div>
+
+{% endblock %}
+
+
+

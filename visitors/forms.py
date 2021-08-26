@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Profile,Booking
+from .models import Profile,Booking, Contact
 from django import forms
 
 class SignupForm(UserCreationForm):
@@ -17,9 +17,15 @@ class EditUserForm(forms.ModelForm):
 class EditProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['user','address','city','number']
+        fields = ['address','city','number']
 
 class BookingForm(forms.ModelForm):
     class Meta:
         model = Booking
-        fields = ['people','book_start','book_end']        
+        fields = ['people','book_start','book_end']   
+
+# class ContactForm(forms.ModelForm):
+#     class Meta:
+#         model = Contact
+#         # fields =[' __all__']
+#         fields = ['message', 'staff_members']

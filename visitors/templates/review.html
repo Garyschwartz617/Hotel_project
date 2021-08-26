@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content%}
+{% if reviews%}
+{% for review in reviews %}
+   <p>Name:{{review.profile.user.username}} - {{review.review}}{% if user.is_staff %} <a href="{% url 'staff_delete_review' review.id%}">delete review</a>{% endif %}</p> 
+{% endfor %}
+{% endif %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button class="btn btn-primary">Leave Review</button>
+</form>
+{% endblock %}

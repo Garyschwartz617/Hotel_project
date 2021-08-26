@@ -9,9 +9,30 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
           </li>
+          {% if user.is_authenticated%}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'rooms' %}">Rooms</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link " href="{% url 'review' %}" tabindex="-1" aria-disabled="true">Review</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="{% url 'messages' %}" tabindex="-1" aria-disabled="true">Contact Staff</a>
+          </li>
+
+          {% if user.is_staff%}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Staff Stuff
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{% url 'staff_view_bookings' %}">Master Booking List</a></li>
+              <li><a class="dropdown-item" href="{% url 'staff_all_contacts' %}">Customer contact</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+          {% endif %}
           {% if user.is_superuser%}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -25,9 +46,8 @@
             </ul>
           </li>
           {% endif %}
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-          </li>
+          {% endif %}
+          
         </ul>
         <form class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

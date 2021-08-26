@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content%}
+{% if contacts%}
+{% for contact in contacts%}
+   <p>Name: {{contact.author}} {{contact.message}}</p> 
+{% endfor %}
+{% endif %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button class="btn btn-primary">Send</button>
+</form>
+{% endblock %}
