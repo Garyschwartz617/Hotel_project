@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content%}
+<h1>How may we help you?</h1>
 {% if contacts%}
 {% for contact in contacts%}
    <p>{{contact.author}}- {{contact.message}}</p> 

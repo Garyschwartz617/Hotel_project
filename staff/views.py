@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from visitors.models import *
 from django.contrib import messages
 from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import user_passes_test,login_required
 
 # Create your views here.
 
@@ -74,6 +75,10 @@ class ReviewDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
 #     def test_func(self):
         return self.request.user.is_staff
 
+def staff_check(user):
+    return user.is_staff
+@login_required
+@user_passes_test(staff_check)
 def allcontacts(request):
     context = {'contacts': Profile.objects.all()}
     return render(request,'staff/all_contacts.html', context )
@@ -81,11 +86,14 @@ def allcontacts(request):
 
 
 
-class StaffCreateContactView(CreateView):
+class StaffCreateContactView(LoginRequiredMixin,UserPassesTestMixin,CreateView):
     model = Contact
     fields = ['message']
     success_url = reverse_lazy('staff_all_contacts')
     template_name = 'staff/contact.html'
+    def test_func(self):
+        return self.request.user.is_staff
+
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

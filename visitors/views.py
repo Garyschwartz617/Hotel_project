@@ -70,7 +70,7 @@ class BookingView(LoginRequiredMixin,DetailView):
 class CreateBookingView(LoginRequiredMixin,CreateView):
     form_class = BookingForm
     success_url = reverse_lazy('home')
-    template_name = 'signup.html'
+    template_name = 'new_booking.html'
     
     def form_valid(self, form):
         booking = form.save(commit=False)

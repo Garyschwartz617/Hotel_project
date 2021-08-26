@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content%}
+<h1>How was your stay? please leave a review</h1>
 {% if reviews%}
 {% for review in reviews %}
    <p>Name:{{review.profile.user.username}} - {{review.review}}{% if user.is_staff %} <a href="{% url 'staff_delete_review' review.id%}">delete review</a>{% endif %}</p> 
